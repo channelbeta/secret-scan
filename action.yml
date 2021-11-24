@@ -20,4 +20,4 @@ runs:
     - ${{ inputs.allowed_patterns }}
 branding:
   icon: lock
-  color: red
+  color: purple
