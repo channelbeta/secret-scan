@@ -2,7 +2,15 @@
 
 Scan your repo for secrets. AWS tokens, keys, this has you covered.
 
-## Example
+This is a fork of [max/secret-scan](https://github.com/max/secret-scan) with an additional option to ignore patterns defined in a JSON file.
+
+## Usage
+
+You should preferably use the Docker image version to avoid having to build the image on your GitHub action.
+
+For more information about path filtering and allowed patterns, please refer to the [truffleHog](https://github.com/trufflesecurity/truffleHog) documentation.
+
+### With Docker
 
 ```yaml
 on: push
@@ -12,10 +20,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: max/secret-scan@master
+      - uses: docker://ghcr.io/channelbeta/secret-scan:2.1.0
 ```
 
-## Example with path filters
+### Without Docker
+
+```yaml
+on: push
+name: Find Secrets
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: channelbeta/secret-scan@2.1.0
+```
+
+### With path filters
 
 Use path filters to manage the set of objects that will be scanned.
 
@@ -27,15 +48,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: max/secret-scan@master
+      - uses: docker://ghcr.io/channelbeta/secret-scan:2.1.0
         with:
-          include_path: 'configuration/include_paths.txt'
-          exclude_path: 'configuration/exclude_paths.txt'
+          include_path: '<path-to>/include_paths.txt'
+          exclude_path: '<path-to>/exclude_paths.txt'
 ```
 
-## Example with allowed patterns
+Sample path filter file:
 
-Use a JSON file to allow secrets that shouldn't trigger a warning.
+```text
+^\.github\/
+^\.terraform\.lock\.hcl$
+.*\.jmx$
+```
+
+### With allowed patterns
+
+Use a JSON file to allow patterns (including regex) that shouldn't trigger a warning.
 
 ```yaml
 on: push
@@ -45,9 +74,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: max/secret-scan@master
+      - uses: docker://ghcr.io/channelbeta/secret-scan:2.1.0
         with:
-          allowed_patterns: 'configuration/allowed_patterns.json'
+          allowed_patterns: '<path-to>/allowed_patterns.json'
 ```
 
-For more information about the format of the configuration files for each additional parameter, please refer to [truffleHog](https://github.com/trufflesecurity/truffleHog) documentation.
+Sample allowed patterns JSON:
+
+```json
+{
+    "descriptive name": "-----BEGIN EC PRIVATE KEY-----\nfoobar123\n-----END EC PRIVATE KEY-----",
+    "git cherry pick SHAs": "regex:Cherry picked from .*"
+}
+```
