@@ -5,8 +5,12 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    reviewers:
+      - "channelbeta"
   # Maintain dependencies for Docker Images
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "daily"
+    reviewers:
+      - "channelbeta"
