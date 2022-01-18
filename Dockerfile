@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.10.1-alpine3.15
 
 # hadolint ignore=DL3013,DL3018
 RUN pip install --no-cache-dir truffleHog && \
