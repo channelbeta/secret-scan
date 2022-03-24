@@ -14,3 +14,10 @@ updates:
       interval: "daily"
     reviewers:
       - "channelbeta"
+  # Maintain dependencies for TruffleHog/Python
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "channelbeta"
