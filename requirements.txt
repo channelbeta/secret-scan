@@ -1,0 +1,2 @@
+truffleHog==2.2.1
+truffleHogRegexes==0.0.7
