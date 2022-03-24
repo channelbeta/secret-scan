@@ -1,6 +1,6 @@
-name: "Secret Scan"
-description: "Scan your repository for secrets"
-author: "Max Schoening <max@max.wtf>"
+name: "Secret Scan fork"
+description: "Scan your repository for secrets with TruffleHog"
+author: "channelbeta"
 inputs:
   include_path:
     description: 'Path to the configuration file with include path patterns'
