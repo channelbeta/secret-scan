@@ -6,12 +6,8 @@ This is a fork of [max/secret-scan](https://github.com/max/secret-scan) with an 
 
 ## Usage
 
-You should preferably use the Docker image version to avoid having to build the image on your GitHub action.
-
 For more information about path filtering and allowed patterns, please refer to the [truffleHog](https://github.com/trufflesecurity/truffleHog) documentation.
 
-### With Docker
-
 ```yaml
 on: push
 name: Find Secrets
@@ -20,20 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: docker://ghcr.io/channelbeta/secret-scan:2.1.0
-```
-
-### Without Docker
-
-```yaml
-on: push
-name: Find Secrets
-jobs:
-  main:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: channelbeta/secret-scan@2.1.0
+      - uses: channelbeta/secret-scan@2.1.6
 ```
 
 ### With path filters
@@ -48,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: docker://ghcr.io/channelbeta/secret-scan:2.1.0
+      - uses: channelbeta/secret-scan@2.1.6
         with:
           include_path: '<path-to>/include_paths.txt'
           exclude_path: '<path-to>/exclude_paths.txt'
@@ -74,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: docker://ghcr.io/channelbeta/secret-scan:2.1.0
+      - uses: channelbeta/secret-scan@2.1.6
         with:
           allowed_patterns: '<path-to>/allowed_patterns.json'
 ```
