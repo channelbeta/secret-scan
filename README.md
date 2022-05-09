@@ -1,3 +1,7 @@
+# DEPRECATED - use the upstream version
+
+Trufflehog now provides their own action. Usage and more information in their [README](https://github.com/trufflesecurity/trufflehog#trufflehog-oss-github-action).
+
 # Secret Scan for GitHub Actions
 
 Scan your repo for secrets. AWS tokens, keys, this has you covered.
